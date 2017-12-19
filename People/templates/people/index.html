@@ -1,0 +1,17 @@
+{% if people %}
+    <table style="border: 1px solid black;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">Name</th>
+        <th style="border: 1px solid black;">Rang</th>
+    </tr>
+    {% for one in people %}
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">{{ one.name }}</th>
+        <th style="border: 1px solid black;">{{one.rang}}</th>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No people are available.</p>
+{% endif %}
+<a href="/people/add"> Add some team users </a>

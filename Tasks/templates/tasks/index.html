@@ -1,0 +1,22 @@
+{% if tasks %}
+    <table style="border: 1px solid black;">
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">Id</th>
+        <th style="border: 1px solid black;">Name</th>
+        <th style="border: 1px solid black;">User</th>
+        <th style="border: 1px solid black;">Date</th>
+    </tr>
+    {% for one in tasks %}
+    <tr style="border: 1px solid black;">
+        <th style="border: 1px solid black;">{{ one.id }}</th>
+        <th style="border: 1px solid black;">{{ one.name }}</th>
+        <th style="border: 1px solid black;">{{ one.user }}</th>
+        <th style="border: 1px solid black;">{{ one.date }}</th>
+        <th style="border: 1px solid black;"><a href='complete?id={{one.id}}'>Click to mark as completed</th>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No tasks are available.</p>
+{% endif %}
+<a href="/add"> Add some tasks for team users </a>
