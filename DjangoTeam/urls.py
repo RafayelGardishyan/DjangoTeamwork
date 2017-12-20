@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from Start import views as sv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Tasks.urls')),
+    path('', sv.index),
+    path('logout/', sv.delete),
+    path('tasks/', include('Tasks.urls')),
     path('people/', include('People.urls')),
     path('ideas/', include('Ideas.urls')),
     path('plans/', include('Plans.urls')),

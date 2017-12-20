@@ -1,0 +1,21 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Start - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<h1>CFLLTD v1.0</h1>
+<form action="" method="get">
+    <table class="formtable">
+        <tr>
+            <th>Password :</th> <th class="forminput"><input type="password" name="pw"></th>
+        </tr>
+        <tr>
+            <th><input type="submit" value="Login"></th>
+        </tr>
+    </table>
+</form>
+</div>
+{% endblock %}

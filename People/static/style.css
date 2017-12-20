@@ -27,6 +27,18 @@ body{
     color: #ffffff;
 }
 
+.logout{
+    color: #ff0008;
+    text-decoration: none;
+    transition: 1000ms;
+    padding: 1%;
+}
+
+.logout:hover{
+    background-color: #ff0008;
+    color: #ffffff;
+}
+
 .content{
     margin-top: 1%;
     background-color: rgba(255, 255, 255, 0.7);
