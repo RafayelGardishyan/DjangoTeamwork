@@ -1,22 +1,33 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
 {% if tasks %}
-    <table style="border: 1px solid black;">
-    <tr style="border: 1px solid black;">
-        <th style="border: 1px solid black;">Id</th>
-        <th style="border: 1px solid black;">Name</th>
-        <th style="border: 1px solid black;">User</th>
-        <th style="border: 1px solid black;">Date</th>
+    <table class="peopletable">
+    <tr class="peopletable">
+        <th class="peopletable">Id</th>
+        <th class="peopletable">Name</th>
+        <th class="peopletable">User</th>
+        <th class="peopletable">Date</th>
     </tr>
     {% for one in tasks %}
-    <tr style="border: 1px solid black;">
-        <th style="border: 1px solid black;">{{ one.id }}</th>
-        <th style="border: 1px solid black;">{{ one.name }}</th>
-        <th style="border: 1px solid black;">{{ one.user }}</th>
-        <th style="border: 1px solid black;">{{ one.date }}</th>
-        <th style="border: 1px solid black;"><a href='complete?id={{one.id}}'>Click to mark as completed</th>
+    <tr class="peopletable">
+        <th class="peopletable">{{ one.id }}</th>
+        <th class="peopletable">{{ one.name }}</th>
+        <th class="peopletable">{{ one.user }}</th>
+        <th class="peopletable">{{ one.date }}</th>
+        <th class="peopletable"><a class="link" href='{{ one.getdeletelink }}'>Complete</th>
     </tr>
     {% endfor %}
     </table>
 {% else %}
     <p>No tasks are available.</p>
 {% endif %}
-<a href="/add"> Add some tasks for team users </a>
+<a class="link" href="/add"> Add some tasks for team users </a>
+</div>
+{% endblock %}
+

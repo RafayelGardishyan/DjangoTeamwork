@@ -1,3 +1,11 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
 <form action="" method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -11,3 +19,5 @@
     {% endfor %}
     <input type="submit" value="Add" />
 </form>
+</div>
+{% endblock %}

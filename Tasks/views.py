@@ -4,6 +4,7 @@ from django.template import loader
 from django.http import HttpResponseRedirect
 
 from .models import Task
+from People.models import People
 from .forms import TaskForm
 # Create your views here.
 def index(request):
@@ -39,9 +40,19 @@ def add(request):
         context = {'form': form}
         return HttpResponse(template.render(context, request))
 
-def delete(request):
+def delete(request, slug):
+    task = Task.objects.get(slug=slug)
+    taskname = task.name
+    user = task.user
     if request.GET:
-        task = Task.objects.get(pk=request.GET['id']).delete()
-        return HttpResponse("Succsessfully removed task<br><a href=\"/\"> Go to homepage </a>")
+        if request.GET['sk'] == user.secretKey:
+            task.delete()
+            return HttpResponse("Successfully deleted task " + taskname)
+        else:
+            return HttpResponse("Wrong Secret Key")
     else:
-        return HttpResponse("No task information")
+        template = loader.get_template('tasks/delete.html')
+        context = {
+            'user': user
+        }
+        return HttpResponse(template.render(context, request))

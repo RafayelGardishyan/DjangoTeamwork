@@ -1,17 +1,28 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
 {% if people %}
-    <table style="border: 1px solid black;">
-    <tr style="border: 1px solid black;">
-        <th style="border: 1px solid black;">Name</th>
-        <th style="border: 1px solid black;">Rang</th>
-    </tr>
+    <table class="peopletable">
+    <tr class="peopletable">
+        <th class="peopletable">Name</th>
+        <th class="peopletable">Rank</th>
+    </tr class="peopletable">
     {% for one in people %}
-    <tr style="border: 1px solid black;">
-        <th style="border: 1px solid black;">{{ one.name }}</th>
-        <th style="border: 1px solid black;">{{one.rang}}</th>
+    <tr class="peopletable">
+        <th class="peopletable">{{ one.name }}</th>
+        <th class="peopletable">{{one.rang}}</th>
+        <th class="peopletable"><a class="link" href='{{ one.getdeletelink}}'>Delete</a></th>
     </tr>
     {% endfor %}
     </table>
 {% else %}
     <p>No people are available.</p>
 {% endif %}
-<a href="/people/add"> Add some team users </a>
+<a class="link" href="/people/add"> Add some team users </a>
+</div>
+{% endblock %}

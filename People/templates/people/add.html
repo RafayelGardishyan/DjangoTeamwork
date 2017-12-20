@@ -1,7 +1,28 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
 <h1>{{message}}</h1>
 <form action="" method="get">
-    First and Last name : <input type="text" name="n"><br>
-    Birth Date: <input type="date" name="bd"><br>
-    Rang: <input type="text" name="r"><br>
+    <table class="formtable">
+        <tr>
+            <th>First and Last name :</th> <th class="forminput"><input type="text" name="n"></th>
+        </tr>
+        <tr>
+            <th>Birth Date:</th> <th class="forminput"><input type="date" name="bd"></th>
+        </tr>
+        <tr>
+            <th>Rank:</th> <th class="forminput"><input type="text" name="r"></th>
+        </tr>
+        <tr>
+            <th>Secret Key:</th> <th class="forminput"><input type="password" name="sk"></th>
+        </tr>
+    </table>
     <input type="submit" value="Add">
 </form>
+</div>
+{% endblock %}

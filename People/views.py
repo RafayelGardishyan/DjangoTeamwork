@@ -18,10 +18,21 @@ def add(request):
         one.name = request.GET['n']
         one.birthDate = request.GET['bd']
         one.rang = request.GET['r']
+        one.secretKey = request.GET['sk']
+        one.saveslug(request.GET['n'])
         one.save()
         return HttpResponse("<a href=\"/people\"> Homepage </a>")
     else:
         context = {'message': "Add new users"}
         template = loader.get_template('people/add.html')
         return HttpResponse(template.render(context, request))
+
+def delete(request, slug):
+    user = People.objects.get(slug=slug)
+    try:
+        user.delete()
+        return HttpResponse("Deleted")
+
+    except:
+        return HttpResponse("Unable to delete")
 

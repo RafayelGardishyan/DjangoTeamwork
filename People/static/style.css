@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+*{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    background: url("background.png");
+}
+
+.navbar{
+    font-size: large;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: block;
+    padding: 1%;
+}
+
+.navlink{
+    color: #000;
+    text-decoration: none;
+    transition: 1000ms;
+    padding: 1%;
+}
+
+.navlink:hover{
+    background-color: black;
+    color: #ffffff;
+}
+
+.content{
+    margin-top: 1%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: block;
+    padding: 1%;
+}
+
+.content{
+    color: #434343;
+    text-decoration: none;
+}
+
+.link{
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 5px;
+}
+
+.link:link, .link:visited {
+    background-color: #0000ff;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.link:hover, .link:active {
+    background-color: #0000a2;
+}
+
+th{
+    text-align: left;
+}
+
+input[type=text], select, input[type=password], input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #a0a29e;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #434343;
+}
+
+.forminput{
+    width: 89%;
+}
+
+table.peopletable, td.peopletable, th.peopletable {
+    border: 3px solid #52546f;
+    text-align: left;
+}
+
+table.peopletable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th.peopletable, td.peopletable {
+    padding: 15px;
+}

@@ -1,0 +1,14 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<h1>Delete Task</h1>
+<h3>User: {{ user.name }}</h3>
+<form action="" method="get">
+    Secret Key: <input type="password" name="sk"><br>
+    <input type="submit" value="Delete">
+</form>
+{% endblock %}
