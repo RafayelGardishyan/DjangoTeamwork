@@ -145,8 +145,7 @@ input[type=submit]:hover {
 }
 
 table.peopletable, td.peopletable, th.peopletable {
-    border: 5px solid #5d61bf;
-    border-radius: 5px;
+    /*border-bottom: 5px solid #5d61bf;*/
     text-align: left;
 }
 
@@ -161,7 +160,7 @@ th.peopletable, td.peopletable {
 
 .ttitle{
     font-size: 30px;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 tb{
