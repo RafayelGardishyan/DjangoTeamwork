@@ -1,0 +1,18 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <form action="" method="get">
+        <select name="user">
+            {% for user in users %}
+            <option value="{{user.id}}">{{user.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Get Tasks">
+    </form>
+</div>
+{% endblock %}

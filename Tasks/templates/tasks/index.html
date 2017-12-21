@@ -5,29 +5,39 @@
 {% endblock %}
 
 {% block content %}
+{% if tasks %}
+<div class="content">
+    <table class="tb">
+        <tr class="tb">
+            <th class="tb"><a href="/tasks/filter/user" class="link">Filter Tasks (User)</a></th>
+            <th class="tb"><a href="/tasks/filter/date" class="link">Filter Tasks (Date)</a></th>
+        </tr>
+    </table>
+</div>
+{% endif %}
 <div class="content">
 {% if tasks %}
     <table class="peopletable">
     <tr class="peopletable">
-        <th class="peopletable">Id</th>
-        <th class="peopletable">Name</th>
-        <th class="peopletable">User</th>
-        <th class="peopletable">Date</th>
+        <th class="peopletable ttitle">Name</th>
+        <th class="peopletable ttitle">User</th>
+        <th class="peopletable ttitle">Date</th>
     </tr>
     {% for one in tasks %}
     <tr class="peopletable">
-        <th class="peopletable">{{ one.id }}</th>
         <th class="peopletable">{{ one.name }}</th>
         <th class="peopletable">{{ one.user }}</th>
         <th class="peopletable">{{ one.date }}</th>
-        <th class="peopletable"><a class="link" href='{{ one.getdeletelink }}'>Complete</th>
+        <th class="peopletable"><a class="greenlink" href='{{ one.getdeletelink }}'>Complete</th>
     </tr>
     {% endfor %}
     </table>
 {% else %}
     <p>No tasks are available.</p>
 {% endif %}
-<a class="link" href="add"> Add some tasks for team users </a>
+</div>
+<div class="content">
+    <a class="link" href="add"> Add some tasks for team users </a>
 </div>
 {% endblock %}
 

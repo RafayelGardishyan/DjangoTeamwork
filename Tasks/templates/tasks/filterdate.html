@@ -1,0 +1,14 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <form action="" method="get">
+        <input type="date" name="date"><br>
+        <input type="submit" value="Get Tasks">
+    </form>
+</div>
+{% endblock %}

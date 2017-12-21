@@ -30,12 +30,35 @@ def add(request):
 
                     form.save()
 
-                    return HttpResponse("<a href=\"/tasks\"> Go to homepage </a>")
-
+                    template = loader.get_template('error.html')
+                    context = {
+                        'message': 'Added Task ' + form.cleaned_data['name'] + ' For User ' + form.cleaned_data['user'].name,
+                        'link': {
+                            'text': 'Return to Tasks home',
+                            'url': '/tasks'
+                        }
+                    }
+                    return HttpResponse(template.render(context, request))
                 else:
-                    return HttpResponse("Form not valid")
+                    template = loader.get_template('error.html')
+                    context = {
+                        'message': 'Form is not valid',
+                        'link': {
+                            'text': 'Return to Tasks home',
+                            'url': '/tasks'
+                        }
+                    }
+                    return HttpResponse(template.render(context, request))
             else:
-                return HttpResponse("Form is not bound")
+                template = loader.get_template('error.html')
+                context = {
+                    'message': 'Form is not bound',
+                    'link': {
+                        'text': 'Return to Tasks home',
+                        'url': '/tasks'
+                    }
+                }
+                return HttpResponse(template.render(context, request))
 
         # if a GET (or any other method) we'll create a blank form
         else:
@@ -63,5 +86,43 @@ def delete(request, slug):
                'user': user
            }
            return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/')
+
+
+def filteruser(request):
+    if request.session.get('logged_in'):
+        if not request.GET:
+            users = People.objects.order_by('name')
+            template = loader.get_template('tasks/filteruser.html')
+            context = {
+                'users': users,
+            }
+            return HttpResponse(template.render(context, request))
+        else:
+            tasks = Task.objects.filter(user=request.GET['user'])
+            template = loader.get_template('tasks/index.html')
+            context = {
+                'tasks': tasks,
+            }
+            return HttpResponse(template.render(context, request))
+
+    else:
+        return redirect('/')
+
+def filterdate(request):
+    if request.session.get('logged_in'):
+        if not request.GET:
+            template = loader.get_template('tasks/filterdate.html')
+            context = {}
+            return HttpResponse(template.render(context, request))
+        else:
+            tasks = Task.objects.filter(date=request.GET['date'])
+            template = loader.get_template('tasks/index.html')
+            context = {
+                'tasks': tasks,
+            }
+            return HttpResponse(template.render(context, request))
+
     else:
         return redirect('/')

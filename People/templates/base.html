@@ -4,6 +4,7 @@
     <title>{% block title %}Codeniacs FLL Team{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="shortcut icon" type="image/png" href="{% static "favicon.png" %}"/>
 <body>
 
     <div class="navbar">
@@ -13,6 +14,8 @@
 			<a class="navlink" href="/people">People</a>
 			<a class="navlink" href="/plans">Plans</a>
 			<a class="navlink" href="/ideas">Ideas</a>
+			<a class="navlink" href="/logs">Logs</a>
+			<a class="navlink" href="/cal">Calendar</a>
 			<a class="navlink" href="/files">Files</a>
 			<a class="logout" href="/logout">Logout</a>
 		</nav>

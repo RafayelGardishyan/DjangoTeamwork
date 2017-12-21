@@ -71,6 +71,45 @@ body{
     background-color: #0000a2;
 }
 
+.redlink{
+    border-radius: 5px;
+    width: 87%;
+}
+
+.redlink:link, .redlink:visited {
+    background-color: #ff0808;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.redlink:hover, .redlink:active {
+    background-color: #a2050b;
+}
+
+
+.greenlink{
+    border-radius: 5px;
+    width: 87%;
+}
+
+.greenlink:link, .greenlink:visited {
+    background-color: #139107;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.greenlink:hover, .greenlink:active {
+    background-color: #0c5c04;
+}
+
 th{
     text-align: left;
 }
@@ -87,13 +126,14 @@ input[type=text], select, input[type=password], input[type=date] {
 
 input[type=submit] {
     width: 100%;
-    background-color: #a0a29e;
+    background-color: #485eb7;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: 500ms;
 }
 
 input[type=submit]:hover {
@@ -105,7 +145,8 @@ input[type=submit]:hover {
 }
 
 table.peopletable, td.peopletable, th.peopletable {
-    border: 3px solid #52546f;
+    border: 5px solid #5d61bf;
+    border-radius: 5px;
     text-align: left;
 }
 
@@ -116,4 +157,13 @@ table.peopletable {
 
 th.peopletable, td.peopletable {
     padding: 15px;
+}
+
+.ttitle{
+    font-size: 30px;
+    font-weight:bold;
+}
+
+tb{
+    width: 50%;
 }

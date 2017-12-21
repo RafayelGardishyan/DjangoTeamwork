@@ -3,6 +3,7 @@ from django.template import loader
 from django.shortcuts import redirect
 
 from .models import People
+from Start.models import Admin
 # Create your views here.
 def index(request):
     if request.session.get('logged_in'):
@@ -25,7 +26,15 @@ def add(request):
             one.secretKey = request.GET['sk']
             one.saveslug(request.GET['n'])
             one.save()
-            return HttpResponse("<a href=\"/people\"> Homepage </a>")
+            template = loader.get_template('error.html')
+            context = {
+                'message': 'Added User ' + one.name,
+                'link': {
+                    'text': 'Return to People home',
+                    'url': '/people'
+                }
+            }
+            return HttpResponse(template.render(context, request))
         else:
             context = {'message': "Add new users"}
             template = loader.get_template('people/add.html')
@@ -36,16 +45,53 @@ def add(request):
 def delete(request, slug):
     if request.session.get('logged_in'):
         user = People.objects.get(slug=slug)
+        admin = Admin.objects.get(id=1)
         if request.GET:
             if request.GET['sk'] == user.secretKey:
-                try:
-                    user.delete()
-                    return HttpResponse("Deleted")
+                if request.GET['ak'] == admin.password:
+                    try:
+                        username = user.name
+                        user.delete()
+                        template = loader.get_template('error.html')
+                        context = {
+                            'message': 'Deleted User ' + username,
+                            'link': {
+                                'text': 'Return to People home',
+                                'url': '/people'
+                            }
+                        }
+                        return HttpResponse(template.render(context, request))
 
-                except:
-                    return HttpResponse("Unable to delete")
+                    except:
+                        template = loader.get_template('error.html')
+                        context = {
+                            'message': 'Unable to delete',
+                            'link': {
+                                'text': 'Return to People home',
+                                'url': '/people'
+                            }
+                        }
+                        return HttpResponse(template.render(context, request))
+                else:
+                    template = loader.get_template('error.html')
+                    context = {
+                        'message': 'Wrong Admin Key',
+                        'link': {
+                            'text': 'Return to People home',
+                            'url': '/people'
+                        }
+                    }
+                    return HttpResponse(template.render(context, request))
             else:
-                return HttpResponse("Wrong Secret Key")
+                template = loader.get_template('error.html')
+                context = {
+                    'message': 'Wrong Secret Key',
+                    'link': {
+                        'text': 'Return to People home',
+                        'url': '/people'
+                    }
+                }
+                return HttpResponse(template.render(context, request))
         else:
             template = loader.get_template('people/delete.html')
             context = {'user': user}

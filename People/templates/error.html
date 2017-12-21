@@ -1,0 +1,12 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h3><b>{{message}}</b></h3>
+    <a class="link" href="{{ link.url }}">{{ link.text }}</a>
+</div>
+{% endblock %}

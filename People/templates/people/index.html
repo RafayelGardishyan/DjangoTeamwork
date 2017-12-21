@@ -9,20 +9,22 @@
 {% if people %}
     <table class="peopletable">
     <tr class="peopletable">
-        <th class="peopletable">Name</th>
-        <th class="peopletable">Rank</th>
-    </tr class="peopletable">
+        <th class="peopletable ttitle">Name</th>
+        <th class="peopletable ttitle">Rank</th>
+    </tr>
     {% for one in people %}
     <tr class="peopletable">
         <th class="peopletable">{{ one.name }}</th>
         <th class="peopletable">{{one.rang}}</th>
-        <th class="peopletable"><a class="link" href='{{ one.getdeletelink}}'>Delete</a></th>
+        <th class="peopletable"><a class="redlink" href='{{ one.getdeletelink}}'>Delete</a></th>
     </tr>
     {% endfor %}
     </table>
 {% else %}
     <p>No people are available.</p>
 {% endif %}
-<a class="link" href="/people/add"> Add some team users </a>
+</div>
+<div class="content">
+    <a class="link" href="/people/add"> Add some team users </a>
 </div>
 {% endblock %}
