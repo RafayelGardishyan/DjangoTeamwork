@@ -1,0 +1,37 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Plans - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<script
+  src="http://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+<div class="content">
+{% if plans %}
+    <table class="peopletable">
+    <tr class="peopletable">
+        <th class="peopletable ttitle">Title</th>
+        <th class="peopletable ttitle">Deadline</th>
+    </tr>
+    {% for one in plans %}
+    <div class="box">
+    <tr class="peopletable">
+        <th class="peopletable">{{ one.name }}</th>
+        <th class="peopletable">{{one.deadline}}</th>
+        <th class="peopletable"><a class="greenlink" href='{{ one.getlink}}'>View Description</a></th>
+        <th class="peopletable"><a class="redlink" href='{{ one.getdeletelink}}'>Delete</a></th>
+    </tr>
+    </div>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No plans are available.</p>
+{% endif %}
+</div>
+<div class="content">
+    <a class="link" href="/plans/add"> Add some plans</a>
+</div>
+{% endblock %}
