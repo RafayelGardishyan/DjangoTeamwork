@@ -9,7 +9,7 @@ from .forms import TaskForm
 # Create your views here.
 def index(request):
     if request.session.get('logged_in'):
-        tasks = Task.objects.order_by('name')
+        tasks = Task.objects.order_by('date')
         template = loader.get_template('tasks/index.html')
         context = {
             'tasks': tasks,
@@ -77,9 +77,25 @@ def delete(request, slug):
        if request.GET:
            if request.GET['sk'] == user.secretKey:
                task.delete()
-               return HttpResponse("Successfully deleted task " + taskname)
+               template = loader.get_template('error.html')
+               context = {
+                   'message': 'Successfully deleted task ' + taskname,
+                   'link': {
+                       'text': 'Return to Tasks home',
+                       'url': '/tasks'
+                   }
+               }
+               return HttpResponse(template.render(context, request))
            else:
-               return HttpResponse("Wrong Secret Key")
+               template = loader.get_template('error.html')
+               context = {
+                   'message': 'Wrong Secret Key',
+                   'link': {
+                       'text': 'Return to Tasks home',
+                       'url': '/tasks'
+                   }
+               }
+               return HttpResponse(template.render(context, request))
        else:
            template = loader.get_template('tasks/delete.html')
            context = {

@@ -114,7 +114,7 @@ th{
     text-align: left;
 }
 
-input[type=text], select, input[type=password], input[type=date] {
+input[type=text], select, input[type=password], input[type=date], textarea{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -161,8 +161,14 @@ th.peopletable, td.peopletable {
 .ttitle{
     font-size: 30px;
     font-weight: bold;
+    color: blue;
 }
 
 tb{
     width: 50%;
+}
+
+.dead{
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
 }

@@ -22,10 +22,14 @@
     <tr class="peopletable">
         <th class="peopletable ttitle">Name</th>
         <th class="peopletable ttitle">User</th>
-        <th class="peopletable ttitle">Date</th>
+        <th class="peopletable ttitle">Deadline</th>
     </tr>
     {% for one in tasks %}
+    {% if one.isdead %}
+    <tr class="peopletable dead">
+    {% else %}
     <tr class="peopletable">
+    {% endif %}
         <th class="peopletable">{{ one.name }}</th>
         <th class="peopletable">{{ one.user }}</th>
         <th class="peopletable">{{ one.date }}</th>

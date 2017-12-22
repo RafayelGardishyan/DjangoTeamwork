@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 
 
@@ -15,3 +17,10 @@ class Plan(models.Model):
 
     def slugcreator(self):
         self.slug = slugify(self.name)
+
+    def isdead(self):
+        if timezone.now().date() >= self.deadline:
+            return True
+
+    def getdeletelink(self):
+        return reverse('delete-plans', args={self.slug})

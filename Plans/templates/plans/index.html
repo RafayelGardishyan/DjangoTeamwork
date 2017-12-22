@@ -17,14 +17,16 @@
         <th class="peopletable ttitle">Deadline</th>
     </tr>
     {% for one in plans %}
-    <div class="box">
+    {% if one.isdead%}
+    <tr class="peopletable dead">
+    {% else %}
     <tr class="peopletable">
+    {% endif %}
         <th class="peopletable">{{ one.name }}</th>
         <th class="peopletable">{{one.deadline}}</th>
         <th class="peopletable"><a class="greenlink" href='{{ one.getlink}}'>View Description</a></th>
         <th class="peopletable"><a class="redlink" href='{{ one.getdeletelink}}'>Delete</a></th>
     </tr>
-    </div>
     {% endfor %}
     </table>
 {% else %}
