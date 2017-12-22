@@ -103,3 +103,14 @@ def delete(request, slug):
            return HttpResponse(template.render(context, request))
     else:
         return redirect('/')
+
+def description(request, slug):
+    if request.session.get('logged_in'):
+        plan = Plan.objects.get(slug=slug)
+        template = loader.get_template('plans/description.html')
+        context = {
+            'plan': plan,
+        }
+        return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/')

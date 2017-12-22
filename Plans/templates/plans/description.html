@@ -1,0 +1,14 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Plans Description - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<div class="desctitle">
+<h1><b>Plan: {{plan.name}}</b></h1>
+<p>{{plan.description}}</p>
+</div>
+</div>
+{% endblock %}

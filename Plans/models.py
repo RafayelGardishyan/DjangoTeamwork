@@ -24,3 +24,6 @@ class Plan(models.Model):
 
     def getdeletelink(self):
         return reverse('delete-plans', args={self.slug})
+
+    def getlink(self):
+        return reverse('description-plans', args={self.slug})
