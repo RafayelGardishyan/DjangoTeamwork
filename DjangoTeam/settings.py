@@ -142,3 +142,9 @@ STATICFILES_FINDERS = (
 STATIC_URL = '/static/'
 
 STATIC_ROOT = ''
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'codeniacs@gmail.com'
+EMAIL_HOST_PASSWORD = 'Cod3niacs2018!'
+EMAIL_USE_TLS = True

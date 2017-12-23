@@ -11,6 +11,7 @@ class People(models.Model):
     rang = models.CharField(max_length=50)
     secretKey = models.CharField(max_length=5, verbose_name="Secret Key")
     slug = models.CharField(max_length=100)
+    activated = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -20,4 +21,7 @@ class People(models.Model):
 
     def getdeletelink(self):
         return reverse('people', args=[self.slug])
+
+    def activationpath(self):
+        return reverse('activate', args=[self.slug, self.rang, self.secretKey])
 

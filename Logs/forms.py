@@ -5,7 +5,7 @@ from People.models import People
 
 class LogForm(forms.Form):
     title = forms.CharField(max_length=100)
-    user = forms.ModelChoiceField(queryset=People.objects.all())
+    user = forms.ModelChoiceField(queryset=People.objects.filter(activated=True))
     text = forms.CharField(widget=forms.Textarea)
 
     def save(self):

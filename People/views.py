@@ -4,10 +4,11 @@ from django.shortcuts import redirect
 
 from .models import People
 from Start.models import Admin
+from django.core.mail import send_mail
 # Create your views here.
 def index(request):
     if request.session.get('logged_in'):
-        people = People.objects.order_by('name')
+        people = People.objects.filter(activated=True).order_by('name')
         template = loader.get_template('people/index.html')
         context = {
             'people': people,
@@ -34,6 +35,13 @@ def add(request):
                     'url': '/people'
                 }
             }
+            send_mail(
+                'Email Activation Codeniacs',
+                'Your account is not confirmed. Click on the link to activate: http://127.0.0.1:8000' + one.activationpath() + ' (Testers)',
+                'codeniacs@gmail.com',
+                [request.GET['e'],],
+                fail_silently=False
+            )
             return HttpResponse(template.render(context, request))
         else:
             context = {'message': "Add new users"}
