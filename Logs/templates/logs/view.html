@@ -1,0 +1,16 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Logs View - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<div class="desctitle">
+<h1><b>Log: {{ log.title}}</b></h1>
+<h4>Date: {{ log.added}} <br> User: {{ log.user}} <br></h4>
+<h4>Text:</h4>
+<p>{{log.text}}</p>
+</div>
+</div>
+{% endblock %}

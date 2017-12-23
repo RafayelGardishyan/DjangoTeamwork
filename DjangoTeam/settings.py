@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'People',
     'Tasks',
     'Start',
+    'Logs',
+    'Calendar',
 ]
 
 MIDDLEWARE = [

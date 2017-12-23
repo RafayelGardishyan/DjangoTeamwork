@@ -6,7 +6,7 @@ from People.models import People
 class TaskForm(forms.Form):
     name = forms.CharField(max_length=50)
     user = forms.ModelChoiceField(queryset=People.objects.all())
-    date = forms.DateField()
+    date = forms.DateField(widget=forms.SelectDateWidget)
 
     def save(self):
         new_task = Task()
