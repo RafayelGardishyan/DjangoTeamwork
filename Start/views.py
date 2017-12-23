@@ -58,8 +58,11 @@ def activate(request, slug, rang, sk):
         return HttpResponse(template.render(context, request))
 
 def siteact(request):
-    if not Admin.objects.get(id=1):
+    try:
+        if Admin.objects.get(id=1):
+            return redirect('/')
+    except:
         a = Admin()
         a.password = 'Cod3niacs2018!'
         a.save()
-    return redirect('/')
+        return redirect('/')
