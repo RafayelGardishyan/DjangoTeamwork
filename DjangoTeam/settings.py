@@ -25,7 +25,7 @@ SECRET_KEY = 'q$5=&t68tbj*+d#t_g*26dn3ifr8^gw6e&4n!1)+qqcm74g^53'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-teamwork.herokuapp.com']
 
 
 # Application definition
