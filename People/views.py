@@ -37,7 +37,7 @@ def add(request):
             }
             send_mail(
                 'Email Activation Codeniacs',
-                'Your account is not confirmed. Click on the link to activate: http://127.0.0.1:8000' + one.activationpath() + ' (Testers)',
+                'Hello ' + one.name + '(Sercret Key: ' + one.secretKey +'), Your account is not confirmed. Click on the link to activate: http://codename-codeniacs.herokuapp.com' + one.activationpath() + ' (Testers)',
                 'codeniacs@gmail.com',
                 [request.GET['e'],],
                 fail_silently=False

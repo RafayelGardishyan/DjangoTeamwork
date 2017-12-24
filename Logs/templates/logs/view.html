@@ -10,7 +10,7 @@
 <h1><b>Log: {{ log.title}}</b></h1>
 <h4>Date: {{ log.added}} <br> User: {{ log.user}} <br></h4>
 <h4>Text:</h4>
-<p>{{log.text}}</p>
+<p>{{log.text|safe}}</p>
 </div>
 </div>
 {% endblock %}
