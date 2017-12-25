@@ -1,17 +1,16 @@
 {% extends "base.html"  %}
 
 {% block title %}
-    People Delete - {{ block.super }}
+    Tasks Completed Delete - {{ block.super }}
 {% endblock %}
 
 {% block content %}
 <div class="content">
-<h1>Delete User</h1>
-<h3>User: {{ user.name }}</h3>
-<h6>Security Key is sent to admin email</h6>
+<h1>Delete Completed Task</h1>
+<h3>Verify Admin Security Key</h3>
+<h6>A security key sent to admin email</h6>
 <form action="" method="get">
     Secret Key: <input type="password" name="sk"><br>
-    Security Key: <input type="password" name="ak"><br>
     <input type="submit" value="Delete">
 </form>
 </div>

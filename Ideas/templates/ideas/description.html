@@ -1,0 +1,14 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Ideas Description - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<div class="desctitle">
+<h1><b>Idea: {{idea.name}}</b></h1>
+<p>{{idea.description|safe|linebreaks}}</p>
+</div>
+</div>
+{% endblock %}

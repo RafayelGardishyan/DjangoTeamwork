@@ -1,12 +1,18 @@
+import random
+
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
 
 
-from People.models import People
+from Start.models import Admin
 from .forms import PlanForm
 from .models import Plan
 # Create your views here.
+values = {
+    'securitytkey': ""
+}
+
 def index(request):
     if request.session.get('logged_in'):
         plans = Plan.objects.order_by('deadline')
@@ -63,7 +69,7 @@ def add(request):
         # if a GET (or any other method) we'll create a blank form
         else:
             form = PlanForm()
-            template = loader.get_template('tasks/add.html')
+            template = loader.get_template('plans/add.html')
             context = {'form': form}
             return HttpResponse(template.render(context, request))
     else:
@@ -73,9 +79,9 @@ def delete(request, slug):
     if request.session.get('logged_in'):
        task = Plan.objects.get(slug=slug)
        planname = task.name
-       user = People.objects.get(name="Rafayel Gardishyan")
+       user = Admin.objects.get(id=1)
        if request.GET:
-           if request.GET['ak'] == user.secretKey:
+           if request.GET['ak'] == values['securitytkey']:
                task.delete()
                template = loader.get_template('error.html')
                context = {
@@ -98,6 +104,14 @@ def delete(request, slug):
                return HttpResponse(template.render(context, request))
 
        else:
+           securitykey = ""
+           for i in range(6):
+               securitykey += str(random.randint(0, 9))
+
+           print(securitykey)
+
+           user.sendemail('Delete Plan', 'Your Security Key is ' + str(securitykey))
+           values['securitykey'] = securitykey
            template = loader.get_template('plans/delete.html')
            context = {}
            return HttpResponse(template.render(context, request))

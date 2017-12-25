@@ -1,0 +1,23 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Ideas Add - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Add" />
+</form>
+</div>
+{% endblock %}

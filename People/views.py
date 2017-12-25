@@ -1,3 +1,5 @@
+import random
+
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
@@ -6,6 +8,10 @@ from .models import People
 from Start.models import Admin
 from django.core.mail import send_mail
 # Create your views here.
+values = {
+    'securitykey': ""
+}
+
 def index(request):
     if request.session.get('logged_in'):
         people = People.objects.filter(activated=True).order_by('name')
@@ -37,7 +43,7 @@ def add(request):
             }
             send_mail(
                 'Email Activation Codeniacs',
-                'Your account is not confirmed. Click on the link to activate: https://codename-codeniacs.herokuapp.com' + one.activationpath() + ' (Testers)',
+                'Hello ' + one.name + '(Sercret Key: ' + one.secretKey +'), Your account is not confirmed. Click on the link to activate: http://codename-codeniacs.herokuapp.com' + one.activationpath() + ' (Testers)',
                 'codeniacs@gmail.com',
                 [request.GET['e'],],
                 fail_silently=False
@@ -56,7 +62,7 @@ def delete(request, slug):
         admin = Admin.objects.get(id=1)
         if request.GET:
             if request.GET['sk'] == user.secretKey:
-                if request.GET['ak'] == admin.password:
+                if request.GET['ak'] == values['securitykey']:
                     try:
                         username = user.name
                         user.delete()
@@ -101,6 +107,14 @@ def delete(request, slug):
                 }
                 return HttpResponse(template.render(context, request))
         else:
+            securitykey = ""
+            for i in range(6):
+                securitykey += str(random.randint(0, 9))
+
+            print(securitykey)
+
+            user.sendemail('Delete User', 'Your Security Key is ' + str(securitykey))
+            values['securitykey'] = securitykey
             template = loader.get_template('people/delete.html')
             context = {'user': user}
             return HttpResponse(template.render(context, request))

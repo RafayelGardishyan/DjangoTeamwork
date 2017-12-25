@@ -1,11 +1,25 @@
+import random
+import string
+
+import sys
+
+import os
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template import loader
 from .models import Admin
 from People.models import People
 
+values = {
+    'licensekey' : ''
+}
+
 def index(request):
-    admin = Admin.objects.get(id=1)
+    try:
+        admin = Admin.objects.get(id=1)
+    except:
+        return redirect('/activate')
     if not request.session.get('logged_in'):
         if request.GET:
             if request.GET['pw'] == admin.password:
@@ -58,11 +72,21 @@ def activate(request, slug, rang, sk):
         return HttpResponse(template.render(context, request))
 
 def siteact(request):
-    try:
-        if Admin.objects.get(id=1):
+    if request.GET:
+        try:
+            if Admin.objects.get(id=1):
+                return redirect('/')
+        except:
+            if request.GET['lk'] != values['licensekey']:
+                return redirect('/activate')
+            a = Admin()
+            a.password = request.GET['pw']
+            a.email = request.GET['e']
+            a.save()
             return redirect('/')
-    except:
-        a = Admin()
-        a.password = 'Cod3niacs2018!'
-        a.save()
-        return redirect('/')
+    else:
+        values['licensekey'] = ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
+        send_mail('License Key For Django Team Website', 'License Key: ' + values['licensekey'], 'codeniacs@gmail.com', [os.environ.get('SUPERADMINDJTWE',)], fail_silently=False)
+        template = loader.get_template('start/websiteactivation.html')
+        context = {}
+        return HttpResponse(template.render(context, request))
