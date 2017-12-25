@@ -1,9 +1,8 @@
 import os
-from audioop import reverse
-
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 from django.utils.text import slugify
 
 

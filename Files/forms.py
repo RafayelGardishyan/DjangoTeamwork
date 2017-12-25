@@ -8,3 +8,11 @@ class FileForm(forms.ModelForm):
         model = File
         fields = ('file',)
 
+    def save(self, commit=True):
+        m = super(FileForm, self).save(commit=False)
+        m.getname()
+        m.saveslug()
+        # do custom stuff
+        if commit:
+            m.save()
+        return m

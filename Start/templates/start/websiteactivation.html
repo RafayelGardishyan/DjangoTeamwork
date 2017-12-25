@@ -1,0 +1,28 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Start - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="content">
+<h1>CFLLTD v1.2 Activation</h1>
+<h4>Create Admin Account</h4>
+<form action="" method="get">
+    <table class="formtable">
+        <tr>
+            <th>Password :</th> <th class="forminput"><input type="password" name="pw"></th>
+        </tr>
+        <tr>
+            <th>Admin Email :</th> <th class="forminput"><input type="email" name="e"></th>
+        </tr>
+        <tr>
+            <th>License Key :</th> <th class="forminput"><input type="text" name="lk"></th>
+        </tr>
+        <tr>
+            <th><input type="submit" value="Activate Website"></th>
+        </tr>
+    </table>
+</form>
+</div>
+{% endblock %}

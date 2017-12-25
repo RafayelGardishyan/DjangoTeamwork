@@ -1,0 +1,47 @@
+{% extends "base.html"  %}
+
+{% block title %}
+    Tasks Completed - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+{% if tasks %}
+<div class="content">
+    <table class="tb">
+        <tr class="tb">
+            <th class="tb"><a href="/tasks/" class="link">Clear Filters</a></th>
+            <th class="tb"><a href="/tasks/filter/user" class="link">Filter Tasks (User)</a></th>
+            <th class="tb"><a href="/tasks/filter/date" class="link">Filter Tasks (Date)</a></th>
+        </tr>
+    </table>
+</div>
+{% endif %}
+<div class="content">
+{% if tasks %}
+    <table class="peopletable">
+    <tr class="peopletable">
+        <th class="peopletable ttitle">Name</th>
+        <th class="peopletable ttitle">User</th>
+        <th class="peopletable ttitle">Deadline</th>
+        <th class="peopletable ttitle">Completed on</th>
+    </tr>
+    {% for one in tasks %}
+    <tr class="peopletable">
+        <th class="peopletable">{{ one.name }}</th>
+        <th class="peopletable">{{ one.user }}</th>
+        <th class="peopletable">{{ one.date }}</th>
+        <th class="peopletable">{{ one.completed_on }}</th>
+        <th class="peopletable"><a class="redlink" href='{{ one.getdeletelink }}'>Delete</a></th>
+    </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No tasks are completed.</p>
+{% endif %}
+</div>
+<div class="content">
+    <a class="link" href="/tasks/add"> Add some tasks for team users </a>
+    <a class="link" href="/tasks/completed"> Completed Tasks </a>
+</div>
+{% endblock %}
+

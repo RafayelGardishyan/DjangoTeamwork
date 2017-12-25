@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.text import slugify
 
 
@@ -14,3 +16,9 @@ class Idea(models.Model):
 
     def slugcreator(self):
         self.slug = slugify(self.name)
+
+    def getdeletelink(self):
+        return reverse('delete-ideas', args={self.slug})
+
+    def getlink(self):
+        return reverse('description-ideas', args={self.slug})

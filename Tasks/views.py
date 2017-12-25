@@ -1,16 +1,35 @@
+import random
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponseRedirect
 
-from .models import Task
+from Start.models import Admin
+from .models import Task, CompletedTask
 from People.models import People
 from .forms import TaskForm
 # Create your views here.
+
+values = {
+    'securitykey': ""
+}
+
 def index(request):
     if request.session.get('logged_in'):
         tasks = Task.objects.order_by('date')
         template = loader.get_template('tasks/index.html')
+        context = {
+            'tasks': tasks,
+        }
+        return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/')
+
+def indexCompleted(request):
+    if request.session.get('logged_in'):
+        tasks = CompletedTask.objects.order_by('completed_on')
+        template = loader.get_template('tasks/indexC.html')
         context = {
             'tasks': tasks,
         }
@@ -76,6 +95,12 @@ def delete(request, slug):
        user = task.user
        if request.GET:
            if request.GET['sk'] == user.secretKey:
+               ctask = CompletedTask()
+               ctask.name = task.name
+               ctask.date = task.date
+               ctask.user = task.user
+               ctask.saveslug(ctask.name)
+               ctask.save()
                task.delete()
                template = loader.get_template('error.html')
                context = {
@@ -105,6 +130,49 @@ def delete(request, slug):
     else:
         return redirect('/')
 
+def deleteCompleted(request, slug):
+    if request.session.get('logged_in'):
+        task = CompletedTask.objects.get(slug=slug)
+        taskname = task.name
+        user = Admin.objects.get(id=1)
+        if request.GET:
+            if request.GET['sk'] == values['securitykey']:
+                task.delete()
+                template = loader.get_template('error.html')
+                context = {
+                    'message': 'Successfully deleted task ' + taskname,
+                    'link': {
+                        'text': 'Return to Completed Tasks home',
+                        'url': '/tasks/completed'
+                    }
+                }
+                return HttpResponse(template.render(context, request))
+            else:
+                template = loader.get_template('error.html')
+                context = {
+                    'message': 'Wrong Secret Key',
+                    'link': {
+                        'text': 'Return to Completed Tasks home',
+                        'url': '/tasks/completed'
+                    }
+                }
+                return HttpResponse(template.render(context, request))
+        else:
+            securitykey = ""
+            for i in range(6):
+                securitykey += str(random.randint(0, 9))
+
+            print(securitykey)
+
+            user.sendemail('Delete Completed Task', 'Your Security Key is ' + str(securitykey))
+            values['securitykey'] = securitykey
+            template = loader.get_template('tasks/deleteC.html')
+            context = {
+                'user': user
+            }
+            return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/')
 
 def filteruser(request):
     if request.session.get('logged_in'):
