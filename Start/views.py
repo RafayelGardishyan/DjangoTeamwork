@@ -82,6 +82,7 @@ def siteact(request):
             a = Admin()
             a.password = request.GET['pw']
             a.email = request.GET['e']
+            a.license = request.GET['lk']
             a.save()
             return redirect('/')
     else:

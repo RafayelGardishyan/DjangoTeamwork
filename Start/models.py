@@ -5,6 +5,7 @@ from django.db import models
 class Admin(models.Model):
     password = models.CharField(max_length=20)
     email = models.EmailField()
+    license = models.CharField(max_length=20)
 
     def sendemail(self, subject, message):
         send_mail(subject, message, 'codeniacs@gmail.com', ['rgardishyan@gmail.com',], fail_silently=False)
