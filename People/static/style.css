@@ -114,7 +114,8 @@ th{
     text-align: left;
 }
 
-input[type=text], select, input[type=password], input[type=date], input[type=email], input[type=url], #id_url, textarea{
+input[type=text], select, input[type=password], input[type=date], input[type=email], input[type=url], textarea, 
+#id_url{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
