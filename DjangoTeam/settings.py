@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Start',
     'Logs',
     'Calendar',
+    'Shortener',
 ]
 
 MIDDLEWARE = [
