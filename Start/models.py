@@ -8,4 +8,4 @@ class Admin(models.Model):
     license = models.CharField(max_length=20)
 
     def sendemail(self, subject, message):
-        send_mail(subject, message, 'codeniacs@gmail.com', ['rgardishyan@gmail.com',], fail_silently=False)
+        send_mail(subject, message, 'codeniacs@gmail.com', [self.email,], fail_silently=False)
