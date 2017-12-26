@@ -33,6 +33,7 @@ urlpatterns = [
     path('files/', include('Files.urls')),
     path('logs/', include('Logs.urls')),
     path('calendar/', include('Calendar.urls')),
+    path('s/', include('Shortener.urls')),
 ]
 
 if settings.DEBUG is True:
