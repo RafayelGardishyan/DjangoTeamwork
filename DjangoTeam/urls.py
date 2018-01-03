@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', sv.index),
     path('logout/', sv.delete),
-    path('activate/<slug:slug>/<str:rang>/<str:sk>', sv.activate, name='activate'),
+    path('activate/<slug:slug>/<str:rang>/<str:sk>/<str:ac>', sv.activate, name='activate'),
     path('activate', sv.siteact),
     path('tasks/', include('Tasks.urls')),
     path('people/', include('People.urls')),

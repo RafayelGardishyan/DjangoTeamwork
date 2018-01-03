@@ -32,6 +32,7 @@ def add(request):
             one.rang = request.GET['r']
             one.secretKey = request.GET['sk']
             one.saveslug(request.GET['n'])
+            one.activation = "".join([str(random.randint(0, 9)) for i in range(15)])
             one.save()
             template = loader.get_template('error.html')
             context = {
@@ -113,7 +114,7 @@ def delete(request, slug):
 
             print(securitykey)
 
-            user.sendemail('Delete User', 'Your Security Key is ' + str(securitykey))
+            admin.sendemail('Delete User', 'Your Security Key is ' + str(securitykey))
             values['securitykey'] = securitykey
             template = loader.get_template('people/delete.html')
             context = {'user': user}
