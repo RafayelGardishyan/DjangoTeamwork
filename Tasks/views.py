@@ -130,6 +130,15 @@ def delete(request, slug):
     else:
         return redirect('/')
 
+def progress(request, slug):
+    if request.session.get('logged_in'):
+        task = Task.objects.get(slug=slug)
+        task.inprogress = True
+        task.save()
+        return redirect('/tasks')
+    else:
+        return redirect('/')
+
 def deleteCompleted(request, slug):
     if request.session.get('logged_in'):
         task = CompletedTask.objects.get(slug=slug)

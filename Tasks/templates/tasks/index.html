@@ -33,7 +33,12 @@
         <th class="peopletable">{{ one.name }}</th>
         <th class="peopletable">{{ one.user }}</th>
         <th class="peopletable">{{ one.date }}</th>
-        <th class="peopletable"><a class="greenlink" href='{{ one.getdeletelink }}'>Complete</th>
+        {% if one.inprogress %}
+        <th class="peopletable inprogress">In progress</th>
+        {% else %}
+        <th class="peopletable"><a class="orangelink" href='{{ one.getinprogress }}'>In progress</a></th>
+        {% endif %}
+        <th class="peopletable"><a class="greenlink" href='{{ one.getdeletelink }}'>Complete</a></th>
     </tr>
     {% endfor %}
     </table>
