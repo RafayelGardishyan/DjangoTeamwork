@@ -110,12 +110,30 @@ body{
     background-color: #0c5c04;
 }
 
+.orangelink{
+    border-radius: 5px;
+    width: 87%;
+}
+
+.orangelink:link, .orangelink:visited {
+    background-color: #ee7805;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.orangelink:hover, .orangelink:active {
+    background-color: #b76512;
+}
+
 th{
     text-align: left;
 }
 
-input[type=text], select, input[type=password], input[type=date], input[type=email], input[type=url], textarea, 
-#id_url{
+input[type=text], select, input[type=password], input[type=date], input[type=email], input[type=url], #id_url textarea{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -191,4 +209,14 @@ tb{
     -moz-border-radius: 7px;
     border-radius: 7px;
     padding:10px;
+}
+
+.inprogress{
+    margin-top: 15px;
+    background-color: rgba(0, 255, 36, 0.9);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
 }
