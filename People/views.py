@@ -114,7 +114,7 @@ def delete(request, slug):
 
             print(securitykey)
 
-            user.sendemail('Delete User', 'Your Security Key is ' + str(securitykey))
+            admin.sendemail('Delete User', 'Your Security Key is ' + str(securitykey))
             values['securitykey'] = securitykey
             template = loader.get_template('people/delete.html')
             context = {'user': user}
