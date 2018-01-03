@@ -32,7 +32,7 @@ def add(request):
             one.rang = request.GET['r']
             one.secretKey = request.GET['sk']
             one.saveslug(request.GET['n'])
-            one.activation = "".join([str(random.randint(0, 9)) for i in xrange(15)])
+            one.activation = "".join([str(random.randint(0, 9)) for i in range(15)])
             one.save()
             template = loader.get_template('error.html')
             context = {
