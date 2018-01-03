@@ -34,7 +34,7 @@
         <th class="peopletable">{{ one.user }}</th>
         <th class="peopletable">{{ one.date }}</th>
         {% if one.inprogress %}
-        <th class="peopletable inprogress">In progress</th>
+        <th class="peopletable"><div class="inprogress">In progress</div></th>
         {% else %}
         <th class="peopletable"><a class="orangelink" href='{{ one.getinprogress }}'>In progress</a></th>
         {% endif %}

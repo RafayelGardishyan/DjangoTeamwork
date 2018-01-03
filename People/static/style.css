@@ -212,8 +212,10 @@ tb{
 }
 
 .inprogress{
-    margin-top: 15px;
-    background-color: rgba(0, 255, 36, 0.9);
+    padding: 14px 25px;
+    width: 87%;
+    /*margin-top: 15px;*/
+    background-color: rgba(14, 19, 127, 0.9);
     color: white;
     text-align: center;
     text-decoration: none;
@@ -221,3 +223,26 @@ tb{
     border-radius: 5px;
 }
 
+.inprogress:after{
+    content: '';
+    -webkit-animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -o-animation-duration: 2s;
+    animation-duration: 2s;
+    -webkit-animation-name: loadingpoints;
+    -moz-animation-name: loadingpoints;
+    -o-animation-name: loadingpoints;
+    animation-name: loadingpoints;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    
+}
+
+@keyframes loadingpoints {
+    0%{content: '   '}
+    33%{content: '.  '}
+    66%{content: '.. '}
+    100%{content: '...'}
+}
