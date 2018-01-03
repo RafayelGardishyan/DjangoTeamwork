@@ -212,6 +212,7 @@ tb{
 }
 
 .inprogress{
+    width: 87%;
     margin-top: 15px;
     background-color: rgba(0, 255, 36, 0.9);
     color: white;
