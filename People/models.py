@@ -12,7 +12,8 @@ class People(models.Model):
     secretKey = models.CharField(max_length=5, verbose_name="Secret Key")
     slug = models.CharField(max_length=100)
     activated = models.BooleanField(default=False)
-
+    activation = models.CharField(max_length=15)    
+	
     def __str__(self):
         return self.name
 
@@ -23,5 +24,5 @@ class People(models.Model):
         return reverse('people', args=[self.slug])
 
     def activationpath(self):
-        return reverse('activate', args=[self.slug, self.rang, self.secretKey])
+        return reverse('activate', args=[self.slug, self.rang, self.secretKey, self.activation])
 
