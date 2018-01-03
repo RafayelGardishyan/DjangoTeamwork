@@ -51,12 +51,12 @@ def activate(request, slug, rang, sk, ac):
                 user.activated = True
                 user.save()
                 return redirect('/')
-             else:
-		 template = loader.get_template('error.html')
-                 context = {
-                     'message': 'Wrong Activation Code', 'link': {'url': '/', 'text': 'Return to start page'}
-                 }
-                 return HttpResponse(template.render(context, request))
+            else:
+        	template = loader.get_template('error.html')
+                context = {
+                    'message': 'Wrong Activation Code', 'link': {'url': '/', 'text': 'Return to start page'}
+                }
+                return HttpResponse(template.render(context, request))
         else:
             template = loader.get_template('error.html')
             context = {
