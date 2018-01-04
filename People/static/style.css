@@ -224,6 +224,7 @@ tb{
 }
 
 .inprogress:after{
+    white-space: pre;
     content: '';
     -webkit-animation-duration: 2s;
     -moz-animation-duration: 2s;
@@ -241,8 +242,8 @@ tb{
 }
 
 @keyframes loadingpoints {
-    0%{content: '   '}
-    33%{content: '.  '}
-    66%{content: '.. '}
-    100%{content: '...'}
+    0%{content: '    '}
+    33%{content: '.   '}
+    66%{content: '..  '}
+    100%{content: '... '}
 }
