@@ -8,6 +8,7 @@ urlpatterns = [
     path('progress/<slug:slug>', views.progress, name='progress'),
     path('completed/delete/<slug:slug>', views.deleteCompleted, name='task-delete'),
     path('completed', views.indexCompleted),
+    path('stats', views.stats),
     path('filter/user', views.filteruser),
     path('filter/date', views.filterdate),
 ]

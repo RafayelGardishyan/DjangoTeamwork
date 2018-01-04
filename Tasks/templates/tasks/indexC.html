@@ -7,13 +7,8 @@
 {% block content %}
 {% if tasks %}
 <div class="content">
-    <table class="tb">
-        <tr class="tb">
-            <th class="tb"><a href="/tasks/" class="link">Clear Filters</a></th>
-            <th class="tb"><a href="/tasks/filter/user" class="link">Filter Tasks (User)</a></th>
-            <th class="tb"><a href="/tasks/filter/date" class="link">Filter Tasks (Date)</a></th>
-        </tr>
-    </table>
+    <a class="{{ status }}" style="width: 46.6%" href="/tasks/stats">Statistics</a>
+    <a class="link" style="width: 46.3%" href="/tasks">Tasks Home</a>
 </div>
 {% endif %}
 <div class="content">
@@ -38,10 +33,6 @@
 {% else %}
     <p>No tasks are completed.</p>
 {% endif %}
-</div>
-<div class="content">
-    <a class="link" href="/tasks/add"> Add some tasks for team users </a>
-    <a class="link" href="/tasks/completed"> Completed Tasks </a>
 </div>
 {% endblock %}
 
