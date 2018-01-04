@@ -17,6 +17,10 @@ values = {
 
 def index(request):
     if request.session.get('logged_in'):
+        if request.GET.get('reload'):
+            reload = bool(request.GET.get('reload'))
+        else:
+            reload = True
         completed = len(CompletedTask.objects.filter())
         inprogress = len(Task.objects.filter(inprogress=True))
         other = len(Task.objects.filter(inprogress=False))
@@ -33,6 +37,7 @@ def index(request):
         context = {
             'status': status,
             'tasks': tasks,
+            'reload': reload,
         }
         return HttpResponse(template.render(context, request))
     else:
@@ -40,6 +45,10 @@ def index(request):
 
 def indexCompleted(request):
     if request.session.get('logged_in'):
+        if request.GET.get('reload'):
+            reload = bool(request.GET.get('reload'))
+        else:
+            reload = True
         completed = len(CompletedTask.objects.filter())
         inprogress = len(Task.objects.filter(inprogress=True))
         other = len(Task.objects.filter(inprogress=False))
@@ -55,7 +64,8 @@ def indexCompleted(request):
         template = loader.get_template('tasks/indexC.html')
         context = {
             'tasks': tasks,
-            'status': status
+            'status': status,
+            'reload': reload,
         }
         return HttpResponse(template.render(context, request))
     else:
@@ -228,11 +238,16 @@ def filteruser(request):
             }
             return HttpResponse(template.render(context, request))
         else:
+            if request.GET.get('reload'):
+                reload = bool(request.GET.get('reload'))
+            else:
+                reload = True
             tasks = Task.objects.filter(user=request.GET['user'])
             template = loader.get_template('tasks/index.html')
             context = {
                 'tasks': tasks,
-                'status': status
+                'status': status,
+                'reload': reload,
             }
             return HttpResponse(template.render(context, request))
 
@@ -257,11 +272,16 @@ def filterdate(request):
             context = {}
             return HttpResponse(template.render(context, request))
         else:
+            if request.GET.get('reload'):
+                reload = bool(request.GET.get('reload'))
+            else:
+                reload = True
             tasks = Task.objects.filter(date=request.GET['date'])
             template = loader.get_template('tasks/index.html')
             context = {
                 'tasks': tasks,
-                'status': status
+                'status': status,
+                'reload': reload,
             }
             return HttpResponse(template.render(context, request))
 
@@ -270,13 +290,19 @@ def filterdate(request):
 
 def stats(request):
     if request.session.get('logged_in'):
+        if request.GET.get('reload'):
+            reload = bool(request.GET.get('reload'))
+        else:
+            reload = True
         completed = len(CompletedTask.objects.filter())
         inprogress = len(Task.objects.filter(inprogress=True))
         other = len(Task.objects.filter(inprogress=False))
+        print(reload)
         context = {
             'completed': completed,
             'inprogress': inprogress,
             'tasks': other,
+            'reload': reload,
         }
         template = loader.get_template('tasks/stats.html')
         return HttpResponse(template.render(context, request))
