@@ -224,6 +224,7 @@ tb{
 }
 
 .inprogress:after{
+    white-space: pre;
     content: '';
     -webkit-animation-duration: 2s;
     -moz-animation-duration: 2s;
@@ -241,8 +242,64 @@ tb{
 }
 
 @keyframes loadingpoints {
-    0%{content: '   '}
-    33%{content: '.  '}
-    66%{content: '.. '}
-    100%{content: '...'}
+    0%{content: '    '}
+    33%{content: '.   '}
+    66%{content: '..  '}
+    100%{content: '... '}
 }
+
+.redlinks{
+    border-radius: 5px;
+}
+
+.redlinks:link, .redlinks:visited {
+    background-color: #ff0808;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.redlinks:hover, .redlinks:active {
+    background-color: #a2050b;
+}
+
+
+.greenlinks{
+    border-radius: 5px;
+}
+
+.greenlinks:link, .greenlinks:visited {
+    background-color: #139107;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.greenlinks:hover, .greenlinks:active {
+    background-color: #0c5c04;
+}
+
+.orangelinks{
+    border-radius: 5px;
+}
+
+.orangelinks:link, .orangelinks:visited {
+    background-color: #ee7805;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+.orangelinks:hover, .orangelinks:active {
+    background-color: #b76512;
+}
+

@@ -8,7 +8,7 @@ from django.utils.text import slugify
 
 
 class Task(models.Model):
-    name = models.CharField(unique=True, max_length=100, verbose_name="Task", null=True, blank=True)
+    name = models.CharField(max_length=100, verbose_name="Task", null=True, blank=True)
     user = models.ForeignKey(People, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     slug = models.CharField(max_length=100, null=True, blank=True)
@@ -31,7 +31,7 @@ class Task(models.Model):
         return reverse('progress', args=[self.slug])
 
 class CompletedTask(models.Model):
-    name = models.CharField(unique=True, max_length=100, verbose_name="Task", null=True, blank=True)
+    name = models.CharField(max_length=100, verbose_name="Task", null=True, blank=True)
     user = models.ForeignKey(People, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     slug = models.CharField(max_length=100, null=True, blank=True)

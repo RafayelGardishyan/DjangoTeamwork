@@ -17,9 +17,21 @@ values = {
 
 def index(request):
     if request.session.get('logged_in'):
+        completed = len(CompletedTask.objects.filter())
+        inprogress = len(Task.objects.filter(inprogress=True))
+        other = len(Task.objects.filter(inprogress=False))
+        if completed == 0 and inprogress == 0 and other == 0:
+            status = 'link'
+        elif completed > inprogress and completed > other:
+            status = 'greenlinks'
+        elif completed < inprogress and completed < other:
+            status = 'redlinks'
+        else:
+            status = 'orangelinks'
         tasks = Task.objects.order_by('date')
         template = loader.get_template('tasks/index.html')
         context = {
+            'status': status,
             'tasks': tasks,
         }
         return HttpResponse(template.render(context, request))
@@ -28,10 +40,22 @@ def index(request):
 
 def indexCompleted(request):
     if request.session.get('logged_in'):
+        completed = len(CompletedTask.objects.filter())
+        inprogress = len(Task.objects.filter(inprogress=True))
+        other = len(Task.objects.filter(inprogress=False))
+        if completed == 0 and inprogress == 0 and other == 0:
+            status = 'link'
+        elif completed > inprogress and completed > other:
+            status = 'greenlinks'
+        elif completed < inprogress and completed < other:
+            status = 'redlinks'
+        else:
+            status = 'orangelinks'
         tasks = CompletedTask.objects.order_by('completed_on')
         template = loader.get_template('tasks/indexC.html')
         context = {
             'tasks': tasks,
+            'status': status
         }
         return HttpResponse(template.render(context, request))
     else:
@@ -185,6 +209,17 @@ def deleteCompleted(request, slug):
 
 def filteruser(request):
     if request.session.get('logged_in'):
+        completed = len(CompletedTask.objects.filter())
+        inprogress = len(Task.objects.filter(inprogress=True))
+        other = len(Task.objects.filter(inprogress=False))
+        if completed == 0 and inprogress == 0 and other == 0:
+            status = 'link'
+        elif completed > inprogress and completed > other:
+            status = 'greenlinks'
+        elif completed < inprogress and completed < other:
+            status = 'redlinks'
+        else:
+            status = 'orangelinks'
         if not request.GET:
             users = People.objects.order_by('name')
             template = loader.get_template('tasks/filteruser.html')
@@ -197,6 +232,7 @@ def filteruser(request):
             template = loader.get_template('tasks/index.html')
             context = {
                 'tasks': tasks,
+                'status': status
             }
             return HttpResponse(template.render(context, request))
 
@@ -205,6 +241,17 @@ def filteruser(request):
 
 def filterdate(request):
     if request.session.get('logged_in'):
+        completed = len(CompletedTask.objects.filter())
+        inprogress = len(Task.objects.filter(inprogress=True))
+        other = len(Task.objects.filter(inprogress=False))
+        if completed == 0 and inprogress == 0 and other == 0:
+            status = 'link'
+        elif completed > inprogress and completed > other:
+            status = 'greenlinks'
+        elif completed < inprogress and completed < other:
+            status = 'redlinks'
+        else:
+            status = 'orangelinks'
         if not request.GET:
             template = loader.get_template('tasks/filterdate.html')
             context = {}
@@ -214,8 +261,24 @@ def filterdate(request):
             template = loader.get_template('tasks/index.html')
             context = {
                 'tasks': tasks,
+                'status': status
             }
             return HttpResponse(template.render(context, request))
 
+    else:
+        return redirect('/')
+
+def stats(request):
+    if request.session.get('logged_in'):
+        completed = len(CompletedTask.objects.filter())
+        inprogress = len(Task.objects.filter(inprogress=True))
+        other = len(Task.objects.filter(inprogress=False))
+        context = {
+            'completed': completed,
+            'inprogress': inprogress,
+            'tasks': other,
+        }
+        template = loader.get_template('tasks/stats.html')
+        return HttpResponse(template.render(context, request))
     else:
         return redirect('/')
