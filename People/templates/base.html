@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="refresh" content="300">
     <title>{% block title %}Codeniacs FLL Team{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static "style.css" %}">
@@ -26,5 +27,10 @@
     {% block content %}
 
     {% endblock %}
+    <script type="text/javascript">
+    setInterval(function() {
+      window.location.reload();
+      }, 300000);
+    </script>
 </body>
 </html>
