@@ -28,7 +28,7 @@ def index(request):
             status = 'link'
         elif completed > (inprogress + other):
             status = 'greenlinks'
-        elif completed < inprogress and completed < other:
+        elif completed < (inprogress +other):
             status = 'redlinks'
         else:
             status = 'orangelinks'
@@ -54,9 +54,9 @@ def indexCompleted(request):
         other = len(Task.objects.filter(inprogress=False))
         if completed == 0 and inprogress == 0 and other == 0:
             status = 'link'
-        elif completed > inprogress and completed > other:
+        elif completed > (inprogress + other):
             status = 'greenlinks'
-        elif completed < inprogress and completed < other:
+        elif completed < (inprogress +other):
             status = 'redlinks'
         else:
             status = 'orangelinks'
@@ -228,9 +228,9 @@ def filteruser(request):
         other = len(Task.objects.filter(inprogress=False))
         if completed == 0 and inprogress == 0 and other == 0:
             status = 'link'
-        elif completed > inprogress and completed > other:
+        elif completed > (inprogress + other):
             status = 'greenlinks'
-        elif completed < inprogress and completed < other:
+        elif completed < (inprogress +other):
             status = 'redlinks'
         else:
             status = 'orangelinks'
@@ -265,9 +265,9 @@ def filterdate(request):
         other = len(Task.objects.filter(inprogress=False))
         if completed == 0 and inprogress == 0 and other == 0:
             status = 'link'
-        elif completed > inprogress and completed > other:
+        elif completed > (inprogress + other):
             status = 'greenlinks'
-        elif completed < inprogress and completed < other:
+        elif completed < (inprogress +other):
             status = 'redlinks'
         else:
             status = 'orangelinks'
