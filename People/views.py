@@ -18,6 +18,7 @@ def index(request):
         template = loader.get_template('people/index.html')
         context = {
             'people': people,
+            'reload': True,
         }
         return HttpResponse(template.render(context, request))
     else:
