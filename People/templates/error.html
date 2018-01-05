@@ -7,6 +7,9 @@
 {% block content %}
 <div class="content">
     <h3><b>{{message}}</b></h3>
-    <a class="link" href="{{ link.url }}">{{ link.text }}</a>
+    <a class="orangelinks" href="{{ link.url }}">{{ link.text }}</a>
+    {% if slink %}
+    <a class="greenlinks" href="{{ slink.url }}">{{ slink.text }}</a>
+    {% endif %}
 </div>
 {% endblock %}

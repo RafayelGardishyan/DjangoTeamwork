@@ -34,7 +34,11 @@ def add(request):
                         'link': {
                             'text': 'Return to Logs home',
                             'url': '/logs',
-                        }
+                        },
+                        'slink': {
+                            'text': 'Add an other Log',
+                            'url': '/logs/add'
+                        },
                     }
                     return HttpResponse(template.render(context, request))
                 else:

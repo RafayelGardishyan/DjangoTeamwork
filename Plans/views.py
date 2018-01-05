@@ -42,7 +42,11 @@ def add(request):
                         'link': {
                             'text': 'Return to Plans home',
                             'url': '/plans',
-                        }
+                        },
+                        'slink': {
+                            'text': 'Add an other Plan',
+                            'url': '/plans/add'
+                        },
                     }
                     return HttpResponse(template.render(context, request))
                 else:

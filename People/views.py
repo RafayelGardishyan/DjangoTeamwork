@@ -36,12 +36,18 @@ def add(request):
             one.save()
             template = loader.get_template('error.html')
             context = {
-                'message': 'Added User ' + one.name,
+                'message': 'Sent Activation Email to User ' + one.name,
                 'link': {
                     'text': 'Return to People home',
                     'url': '/people'
-                }
+                },
+                'slink': {
+                    'text': 'Add an other User',
+                    'url': '/people/add'
+                },
             }
+            a = Admin.objects.get(id=1)
+            a.sendemail('Added user ' + one.name, 'User secret key: ' + one.secretKey + ' User is not activated yet.')
             send_mail(
                 'Email Activation Codeniacs',
                 'Hello ' + one.name + '(Sercret Key: ' + one.secretKey +'), Your account is not confirmed. Click on the link to activate: http://codename-codeniacs.herokuapp.com' + one.activationpath() + ' (Testers)',

@@ -44,12 +44,25 @@ def delete(request):
         return redirect('/')
 
 def activate(request, slug, rang, sk, ac):
-    user = People.objects.get(slug=slug)
+    try:
+        user = People.objects.get(slug=slug)
+    except:
+        template = loader.get_template('error.html')
+        context = {
+            'message': 'User does not exist',
+            'link': {
+                'url': '/',
+                'text': 'Return to start page'
+            }
+        }
+        return HttpResponse(template.render(context, request))
     if user.rang == rang:
         if user.secretKey == sk:
             if user.activation == ac:
                 user.activated = True
                 user.save()
+                a = Admin.objects.get(id=1)
+                a.sendemail('Activated user', 'Activated user ' + user.name)
                 return redirect('/')
             else:
                 template = loader.get_template('error.html')
