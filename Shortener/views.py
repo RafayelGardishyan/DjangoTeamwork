@@ -22,11 +22,15 @@ def index(request):
 
                     template = loader.get_template('error.html')
                     context = {
-                        'message': 'Added Short ' + form.cleaned_data['path'] + ' For Url ' + form.cleaned_data['url'],
+                        'message': 'Added Short codename-codeniacs.herokuapp.com/s/' + form.cleaned_data['path'] + ' For Url ' + form.cleaned_data['url'],
                         'link': {
                             'text': 'Add another short',
                             'url': '/s'
-                        }
+                        },
+                        'slink': {
+                            'text': 'Visit Website',
+                            'url': form.cleaned_data['url']
+                        },
                     }
                     return HttpResponse(template.render(context, request))
                 else:

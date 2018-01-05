@@ -41,7 +41,11 @@ def add(request):
                         'link': {
                             'text': 'Return to Ideas home',
                             'url': '/ideas',
-                        }
+                        },
+                        'slink': {
+                            'text': 'Add an other Idea',
+                            'url': '/ideas/add'
+                        },
                     }
                     return HttpResponse(template.render(context, request))
                 else:

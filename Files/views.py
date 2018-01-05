@@ -85,7 +85,11 @@ def add(request):
                         'link': {
                             'text': 'Return to Files home',
                             'url': '/files',
-                        }
+                        },
+                        'slink': {
+                            'text': 'Add an other File',
+                            'url': '/files/add'
+                        },
                     }
                     return HttpResponse(template.render(context, request))
                 else:

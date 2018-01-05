@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.db import models
 from People.models import People
 
@@ -18,7 +21,7 @@ class Task(models.Model):
         return self.name
 
     def saveslug(self, slug):
-        self.slug = slugify(slug)
+        self.slug = slugify(slug + str(''.join(random.choices(string.ascii_uppercase + string.digits, k=10))))
 
     def getdeletelink(self):
         return reverse('task', args=[self.slug])
@@ -41,7 +44,7 @@ class CompletedTask(models.Model):
         return self.name
 
     def saveslug(self, slug):
-        self.slug = slugify(slug)
+        self.slug = slugify(slug + str(''.join(random.choices(string.ascii_uppercase + string.digits, k=10))))
 
     def getdeletelink(self):
         return reverse('task-delete', args=[self.slug])
