@@ -34,6 +34,7 @@ urlpatterns = [
     path('logs/', include('Logs.urls')),
     path('calendar/', include('Calendar.urls')),
     path('s/', include('Shortener.urls')),
+    path('api/v1/9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b/', include('api.urls'))
 ]
 
 if settings.DEBUG is True:

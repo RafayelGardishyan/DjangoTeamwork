@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'Logs',
     'Calendar',
     'Shortener',
+    'api',
+    'rest_framework',
+    # 'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
