@@ -2,3 +2,4 @@ dj-database-url==0.4.2
 Django==2.0
 pytz==2017.3
 psycopg2>=2.7
+djangorestframework==3.7.7
