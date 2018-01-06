@@ -7,9 +7,11 @@ from django.shortcuts import redirect
 from .models import People
 from Start.models import Admin
 from django.core.mail import send_mail
+from webhooks import Webhook
 # Create your views here.
 values = {
-    'securitykey': ""
+    'securitykey': "",
+    'whurl': "https://discordapp.com/api/webhooks/399280451258417162/ex_ix9eIhkltscgcS3AyiDt4iVqBpowzAg4LZIFsbuwcJ01jUMkM8Jp78B5YWX6zPoLM",
 }
 
 def index(request):
@@ -56,6 +58,19 @@ def add(request):
                 [request.GET['e'],],
                 fail_silently=False
             )
+
+            embed = Webhook(values['whurl'], color=123123)
+
+            embed.set_author(name='Codeniacs Website',
+                             icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+            embed.set_desc('Added User')
+            embed.add_field(name='Name', value=one.name)
+            embed.add_field(name='Rank', value=one.rang)
+            embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
+
+            embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                             icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+            embed.post()
             return HttpResponse(template.render(context, request))
         else:
             context = {'message': "Add new users"}
@@ -82,6 +97,17 @@ def delete(request, slug):
                                 'url': '/people'
                             }
                         }
+                        embed = Webhook(values['whurl'], color=123123)
+
+                        embed.set_author(name='Codeniacs Website',
+                                         icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+                        embed.set_desc('Deleted User')
+                        embed.add_field(name='Name', value=username)
+                        embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
+
+                        embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                                         icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+                        embed.post()
                         return HttpResponse(template.render(context, request))
 
                     except:

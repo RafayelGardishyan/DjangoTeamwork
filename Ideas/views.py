@@ -8,9 +8,11 @@ from django.template import loader
 from Start.models import Admin
 from .forms import IdeaForm
 from .models import Idea
+from webhooks import Webhook
 # Create your views here.
 values = {
-    'securitykey': ""
+    'securitykey': "",
+    'whurl': "https://discordapp.com/api/webhooks/399280451258417162/ex_ix9eIhkltscgcS3AyiDt4iVqBpowzAg4LZIFsbuwcJ01jUMkM8Jp78B5YWX6zPoLM",
 }
 def index(request):
     if request.session.get('logged_in'):
@@ -47,6 +49,17 @@ def add(request):
                             'url': '/ideas/add'
                         },
                     }
+                    embed = Webhook(values['whurl'], color=123123)
+
+                    embed.set_author(name='Codeniacs Website',
+                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+                    embed.set_desc('Added Idea')
+                    embed.add_field(name='Name', value=form.cleaned_data['title'])
+                    embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
+
+                    embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+                    embed.post()
                     return HttpResponse(template.render(context, request))
                 else:
                     template = loader.get_template('error.html')
@@ -95,6 +108,16 @@ def delete(request, slug):
                        'url': '/ideas'
                    }
                }
+               embed = Webhook(values['whurl'], color=123123)
+
+               embed.set_author(name='Codeniacs Website',
+                                icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+               embed.set_desc('Deleted Idea')
+               embed.add_field(name='Name', value=ideaname)
+               embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
+               embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                                icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+               embed.post()
                return HttpResponse(template.render(context, request))
            else:
                template = loader.get_template('error.html')
