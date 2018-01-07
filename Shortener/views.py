@@ -6,7 +6,11 @@ from django.template import loader
 
 from .models import Short
 from .forms import ShortForm
+from webhooks import Webhook
 
+values = {
+    'whurl': "https://discordapp.com/api/webhooks/399280451258417162/ex_ix9eIhkltscgcS3AyiDt4iVqBpowzAg4LZIFsbuwcJ01jUMkM8Jp78B5YWX6zPoLM"
+}
 
 def index(request):
     # if this is a POST request we need to process the form data
@@ -32,6 +36,18 @@ def index(request):
                             'url': form.cleaned_data['url']
                         },
                     }
+                    embed = Webhook(values['whurl'], color=123123)
+
+                    embed.set_author(name='Codeniacs Website',
+                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+                    embed.set_desc('Added Shortcut')
+                    embed.add_field(name='Path', value=form.cleaned_data['path'])
+                    embed.add_field(name='Url', value=form.cleaned_data['url'])
+                    embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
+
+                    embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+                    embed.post()
                     return HttpResponse(template.render(context, request))
                 else:
                     template = loader.get_template('error.html')
