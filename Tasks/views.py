@@ -10,7 +10,11 @@ from .models import Task, CompletedTask
 from People.models import People
 from .forms import TaskForm
 from webhooks import Webhook
+import subprocess
+process = subprocess.Popen(['python', 'taskbot.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+#import taskbot
 
+#TASKBOT = taskbot.Cl()
 
 
 # Create your views here.
