@@ -17,10 +17,10 @@ class Cl:
 		Description:
 		This is a bot that helps you with task management. You can add Tasks, view them and later delete.\n
 		Commands:
-		#:task <taskname> = Add a task to your account
-		#:mytasks = Get all your tasks
-		#:deltask <taskname> = Delete the task with this name
-		#:? of #:help = Help command
+		::task <taskname> = Add a task to your account
+		::mytasks = Get all your tasks
+		::deltask <taskname> = Delete the task with this name
+		::? of #:help = Help command
 		'''
 
 
