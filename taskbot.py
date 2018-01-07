@@ -30,17 +30,17 @@ class Cl:
 			print(client.user.name)
 			print(client.user.id)
 			print('------')
-			await client.change_presence(game=discord.Game(name="Prefix: '#:'"))
+			await client.change_presence(game=discord.Game(name="Prefix: '::'"))
 
 		@client.event
 		async def on_message(message):
-			if message.content.startswith('#:task'):
+			if message.content.startswith('::task'):
 				tmp = await client.send_message(message.channel, 'Adding Task ...')
 				task = message.content[7:]
 				db.addtask(task, message.author)
 				await client.edit_message(tmp, 'Added task {} for user {}.'.format(task, message.author))
 
-			elif message.content.startswith('#:mytasks'):
+			elif message.content.startswith('::mytasks'):
 				tmp = await client.send_message(message.channel, 'Getting Tasks ...')
 				tasksraw = db.gettasks(message.author)
 				tcount = 0
@@ -55,7 +55,7 @@ class Cl:
 				else:
 					await client.edit_message(tmp, 'You have no tasks')
 					
-			elif message.content.startswith('#:deltask'):
+			elif message.content.startswith('::deltask'):
 				tmp = await client.send_message(message.channel, 'Deleting Task ...')
 				task = message.content[10:]
 				author = message.author
@@ -64,11 +64,11 @@ class Cl:
 				else:
 					await client.edit_message(tmp, 'Error: Can\'t delete task {}'.format(task))
 					
-			elif message.content.startswith('#:help') or message.content.startswith('#:?'):
+			elif message.content.startswith('::help') or message.content.startswith('::?'):
 				await client.send_message(message.author, help_message)
 				
 			
-			elif message.content.startswith('!'):
+			elif message.content.startswith('!@#EXIT'):
 				db.disconnect()
 				raise SystemExit("Exited with !exit command")
 
