@@ -12,6 +12,7 @@ from .forms import TaskForm
 from webhooks import Webhook
 import subprocess
 process = subprocess.Popen(['python', 'taskbot.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+process2 = subprocess.Popen(['python', 'requestbot.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 #import taskbot
 
 #TASKBOT = taskbot.Cl()
