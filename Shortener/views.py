@@ -22,34 +22,49 @@ def index(request):
 
             if form.is_bound:
                 if form.is_valid():
+                    shorts = Short.objects.all()
+                    exists = False
+                    for short in shorts:
+                        if short.slug == form.cleaned_data['path']:
+                            exists = True
+                    if not exists:
+                        form.save()
 
-                    form.save()
+                        template = loader.get_template('error.html')
+                        context = {
+                            'message': 'Added Short codename-codeniacs.herokuapp.com/s/' + form.cleaned_data['path'] + ' For Url ' + form.cleaned_data['url'],
+                            'link': {
+                                'text': 'Add another short',
+                                'url': '/s'
+                            },
+                            'slink': {
+                                'text': 'Visit Website',
+                                'url': form.cleaned_data['url']
+                            },
+                        }
+                        embed = Webhook(values['whurl'], color=123123)
 
-                    template = loader.get_template('error.html')
-                    context = {
-                        'message': 'Added Short codename-codeniacs.herokuapp.com/s/' + form.cleaned_data['path'] + ' For Url ' + form.cleaned_data['url'],
-                        'link': {
-                            'text': 'Add another short',
-                            'url': '/s'
-                        },
-                        'slink': {
-                            'text': 'Visit Website',
-                            'url': form.cleaned_data['url']
-                        },
-                    }
-                    embed = Webhook(values['whurl'], color=123123)
+                        embed.set_author(name='Codeniacs Website',
+                                         icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
+                        embed.set_desc('Added Shortcut')
+                        embed.add_field(name='Path', value=form.cleaned_data['path'])
+                        embed.add_field(name='Url', value=form.cleaned_data['url'])
+                        embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
 
-                    embed.set_author(name='Codeniacs Website',
-                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png')
-                    embed.set_desc('Added Shortcut')
-                    embed.add_field(name='Path', value=form.cleaned_data['path'])
-                    embed.add_field(name='Url', value=form.cleaned_data['url'])
-                    embed.set_thumbnail('https://codename-codeniacs.herokuapp.com/static/favicon.png')
-
-                    embed.set_footer(text='This message was automatically sent form Codeniacs Website',
-                                     icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
-                    embed.post()
-                    return HttpResponse(template.render(context, request))
+                        embed.set_footer(text='This message was automatically sent form Codeniacs Website',
+                                         icon='https://codename-codeniacs.herokuapp.com/static/favicon.png', ts=True)
+                        embed.post()
+                        return HttpResponse(template.render(context, request))
+                    else:
+                        template = loader.get_template('error.html')
+                        context = {
+                            'message': 'Short already exists',
+                            'link': {
+                                'text': 'Try again',
+                                'url': '/s'
+                            }
+                        }
+                        return HttpResponse(template.render(context, request))
                 else:
                     template = loader.get_template('error.html')
                     context = {
