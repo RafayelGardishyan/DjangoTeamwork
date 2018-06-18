@@ -151,10 +151,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = ''
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'codeniacs@gmail.com'
-EMAIL_HOST_PASSWORD = 'Cod3niacs2018!'
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'rgardishyan@yandex.com'
+EMAIL_HOST_PASSWORD = 'raforafo11241124'
 EMAIL_USE_TLS = True
 
 MEDIA_URL = '/media/'
