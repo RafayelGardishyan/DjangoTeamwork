@@ -111,7 +111,7 @@ def siteact(request):
             return redirect('/')
     else:
         values['licensekey'] = ''.join(random.choices(string.ascii_uppercase + string.digits, k=20))
-        send_mail('License Key For Django Team Website', 'License Key: ' + values['licensekey'], 'rgardishyan@yandex.com', 'rgardishyan@gmail.com', fail_silently=False)
+        send_mail('License Key For Django Team Website', 'License Key: ' + values['licensekey'], 'rgardishyan@yandex.com', ['rgardishyan@gmail.com'], fail_silently=False)
         template = loader.get_template('start/websiteactivation.html')
         context = {}
         return HttpResponse(template.render(context, request))
